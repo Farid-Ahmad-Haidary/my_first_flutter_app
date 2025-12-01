@@ -1,43 +1,45 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyPortfolioApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyPortfolioApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Single Page Flutter App',
+      title: 'Farid Ahmad Haidary Portfolio',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Arial',
       ),
-      home: HomePage(),
+      home: PortfolioPage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class PortfolioPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Navbar
       appBar: AppBar(
-        title: Text('My Single Page App'),
+        title: Text('Farid Ahmad Haidary'),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
         elevation: 4,
       ),
-      // Body
+
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Hero Section
+
+            // ***********************
+            // HERO / INTRO SECTION
+            // ***********************
             Container(
               width: double.infinity,
-              height: 300,
+              height: 330,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.blueAccent, Colors.lightBlueAccent],
@@ -49,74 +51,113 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Welcome to My App',
-                      style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                      textAlign: TextAlign.center,
+                    CircleAvatar(
+                      radius: 55,
+                      backgroundColor: Colors.white,
+                      child: Icon(Icons.person,
+                          size: 70, color: Colors.blueAccent),
                     ),
                     SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: Colors.blueAccent,
-                        padding:
-                        EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                        textStyle: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                    Text(
+                      "Farid Ahmad Haidary",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
-                      child: Text('Get Started'),
-                    )
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Flutter Developer • Mobile Developer • Web Developer",
+                      style: TextStyle(fontSize: 17, color: Colors.white70),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Final-year Student at Kabul University, Afghanistan",
+                      style: TextStyle(fontSize: 15, color: Colors.white70),
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
               ),
             ),
 
-            // Features Section
+            // ***********************
+            // ABOUT ME SECTION
+            // ***********************
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 60, horizontal: 20),
+              padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
               color: Colors.grey[100],
               child: Column(
                 children: [
                   Text(
-                    'Features',
+                    "About Me",
+                    style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueAccent),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    "My name is Farid Ahmad Haidary, from Afghanistan. "
+                        "I am a passionate Mobile Developer specializing in Flutter, "
+                        "and I also work as a Web Developer. "
+                        "I love building beautiful, fast, and modern applications. "
+                        "Currently, I am a final-year student at Kabul University "
+                        "and actively working on improving my skills in full-stack "
+                        "development, modern UI/UX, and scalable app design.",
+                    style: TextStyle(fontSize: 16, color: Colors.black87),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+
+            // ***********************
+            // SKILLS SECTION
+            // ***********************
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 60, horizontal: 20),
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Text(
+                    "Skills",
                     style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                         color: Colors.blueAccent),
                   ),
                   SizedBox(height: 40),
+
                   Wrap(
                     spacing: 30,
                     runSpacing: 30,
                     alignment: WrapAlignment.center,
                     children: [
-                      FeatureCard(
+                      SkillCard(
+                        icon: Icons.flutter_dash,
+                        title: "Flutter",
+                        description: "Cross-platform app development",
+                      ),
+                      SkillCard(
                         icon: Icons.phone_android,
-                        title: 'Responsive',
-                        description:
-                        'Works beautifully on all devices.',
+                        title: "Mobile Development",
+                        description: "Android apps with beautiful UI",
                       ),
-                      FeatureCard(
-                        icon: Icons.speed,
-                        title: 'Fast',
-                        description:
-                        'Smooth performance and animations.',
+                      SkillCard(
+                        icon: Icons.web,
+                        title: "Web Development",
+                        description: "Responsive & modern websites",
                       ),
-                      FeatureCard(
-                        icon: Icons.palette,
-                        title: 'Modern Design',
-                        description:
-                        'Beautiful UI with gradients and colors.',
-                      ),
-                      FeatureCard(
-                        icon: Icons.lock,
-                        title: 'Secure',
-                        description: 'Safe and reliable app features.',
+                      SkillCard(
+                        icon: Icons.code,
+                        title: "Programming",
+                        description: "Dart • JavaScript • HTML • CSS",
                       ),
                     ],
                   ),
@@ -124,7 +165,50 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
-            // Call to Action Section
+            // ***********************
+            // PROJECTS SECTION
+            // ***********************
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 60, horizontal: 20),
+              color: Colors.grey[100],
+              child: Column(
+                children: [
+                  Text(
+                    "Projects",
+                    style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueAccent),
+                  ),
+                  SizedBox(height: 40),
+
+                  ProjectCard(
+                    title: "Personal Portfolio App",
+                    description:
+                    "A modern Flutter-based portfolio application showcasing skills and experience.",
+                  ),
+                  SizedBox(height: 20),
+
+                  ProjectCard(
+                    title: "Mobile UI Templates",
+                    description:
+                    "Beautiful Flutter UI screens such as login, signup, dashboards, and more.",
+                  ),
+                  SizedBox(height: 20),
+
+                  ProjectCard(
+                    title: "Web Projects",
+                    description:
+                    "Fully responsive static websites and modern landing pages.",
+                  ),
+                ],
+              ),
+            ),
+
+            // ***********************
+            // CALL TO ACTION
+            // ***********************
             Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(vertical: 60, horizontal: 20),
@@ -138,11 +222,12 @@ class HomePage extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Ready to Start Your Project?',
+                    'Want to Work With Me?',
                     style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 20),
@@ -153,24 +238,26 @@ class HomePage extends StatelessWidget {
                       foregroundColor: Colors.blueAccent,
                       padding:
                       EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                      textStyle:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      textStyle: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    child: Text('Contact Us'),
+                    child: Text('Contact Me'),
                   )
                 ],
               ),
             ),
 
-            // Footer
+            // ***********************
+            // FOOTER
+            // ***********************
             Container(
               width: double.infinity,
               padding: EdgeInsets.all(20),
               color: Colors.blueGrey[900],
               child: Center(
                 child: Text(
-                  '© 2025 My Single Page App | All Rights Reserved',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  '© 2025 Farid Ahmad Haidary | Afghanistan | All Rights Reserved',
+                  style: TextStyle(color: Colors.white70, fontSize: 16),
                 ),
               ),
             ),
@@ -181,13 +268,15 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// Feature Card Widget
-class FeatureCard extends StatelessWidget {
+// --------------------------------------
+// SKILL CARD WIDGET
+// --------------------------------------
+class SkillCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final String description;
 
-  FeatureCard(
+  SkillCard(
       {required this.icon, required this.title, required this.description});
 
   @override
@@ -222,6 +311,49 @@ class FeatureCard extends StatelessWidget {
             style: TextStyle(fontSize: 14, color: Colors.black54),
             textAlign: TextAlign.center,
           ),
+        ],
+      ),
+    );
+  }
+}
+
+// --------------------------------------
+// PROJECT CARD WIDGET
+// --------------------------------------
+class ProjectCard extends StatelessWidget {
+  final String title;
+  final String description;
+
+  ProjectCard({required this.title, required this.description});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              blurRadius: 8,
+              offset: Offset(0, 5)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+          SizedBox(height: 10),
+          Text(
+            description,
+            style: TextStyle(fontSize: 16, color: Colors.black54),
+          )
         ],
       ),
     );
