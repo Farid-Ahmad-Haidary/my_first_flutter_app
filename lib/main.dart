@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyPortfolioApp());
+  runApp(MyApp());
 }
 
-class MyPortfolioApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  final Color mochaMousse = const Color(0xFFA0785A);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Farid Ahmad Haidary Portfolio',
+      title: 'Farid Portfolio',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Arial',
+        primaryColor: mochaMousse,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          backgroundColor: mochaMousse,
+        ),
       ),
       home: PortfolioPage(),
     );
@@ -20,13 +25,17 @@ class MyPortfolioApp extends StatelessWidget {
 }
 
 class PortfolioPage extends StatelessWidget {
+  final Color mocha = const Color(0xFFA0785A);
+
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    bool isWide = width > 600;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Farid Ahmad Haidary'),
+        title: const Text('Farid Ahmad Haidary'),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
         elevation: 4,
       ),
 
@@ -34,230 +43,133 @@ class PortfolioPage extends StatelessWidget {
         child: Column(
           children: [
 
-            // ***********************
-            // HERO / INTRO SECTION
-            // ***********************
+            // HERO SECTION
             Container(
               width: double.infinity,
-              height: 330,
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blueAccent, Colors.lightBlueAccent],
+                  colors: [mocha, mocha.withOpacity(0.7)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
               ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 55,
+              child: Column(
+                children: [
+                  // Profile photo
+                  CircleAvatar(
+                    radius: isWide ? 90 : 70,
+                    backgroundImage: AssetImage("assets/profile.png"),
+                  ),
+                  const SizedBox(height: 20),
+
+                  Text(
+                    "Farid Ahmad Haidary",
+                    style: TextStyle(
+                      fontSize: isWide ? 32 : 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  Text(
+                    "Mobile Developer • Flutter Developer • Web Developer\nFinal Year Student, Kabul University",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: isWide ? 18 : 15,
+                      color: Colors.white.withOpacity(0.9),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      child: Icon(Icons.person,
-                          size: 70, color: Colors.blueAccent),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      "Farid Ahmad Haidary",
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                      foregroundColor: mocha,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 25,
+                        vertical: 15,
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Flutter Developer • Mobile Developer • Web Developer",
-                      style: TextStyle(fontSize: 17, color: Colors.white70),
-                      textAlign: TextAlign.center,
+                    child: const Text(
+                      "Contact Me",
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Final-year Student at Kabul University, Afghanistan",
-                      style: TextStyle(fontSize: 15, color: Colors.white70),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
+                  )
+                ],
               ),
             ),
 
-            // ***********************
-            // ABOUT ME SECTION
-            // ***********************
+            // SKILLS SECTION
             Container(
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                children: [
+                  Text(
+                    "My Skills",
+                    style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: mocha),
+                  ),
+                  const SizedBox(height: 30),
+
+                  Wrap(
+                    spacing: 20,
+                    runSpacing: 20,
+                    alignment: WrapAlignment.center,
+                    children: const [
+                      SkillCard(icon: Icons.phone_android, title: "Flutter Development"),
+                      SkillCard(icon: Icons.web, title: "Web Development"),
+                      SkillCard(icon: Icons.code, title: "Python / Dart"),
+                      SkillCard(icon: Icons.school, title: "Problem Solving"),
+                    ],
+                  )
+                ],
+              ),
+            ),
+
+            // ABOUT SECTION
+            Container(
+              padding: const EdgeInsets.all(35),
               width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
               color: Colors.grey[100],
               child: Column(
                 children: [
                   Text(
                     "About Me",
                     style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    "My name is Farid Ahmad Haidary, from Afghanistan. "
-                        "I am a passionate Mobile Developer specializing in Flutter, "
-                        "and I also work as a Web Developer. "
-                        "I love building beautiful, fast, and modern applications. "
-                        "Currently, I am a final-year student at Kabul University "
-                        "and actively working on improving my skills in full-stack "
-                        "development, modern UI/UX, and scalable app design.",
-                    style: TextStyle(fontSize: 16, color: Colors.black87),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-
-            // ***********************
-            // SKILLS SECTION
-            // ***********************
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 60, horizontal: 20),
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Text(
-                    "Skills",
-                    style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent),
-                  ),
-                  SizedBox(height: 40),
-
-                  Wrap(
-                    spacing: 30,
-                    runSpacing: 30,
-                    alignment: WrapAlignment.center,
-                    children: [
-                      SkillCard(
-                        icon: Icons.flutter_dash,
-                        title: "Flutter",
-                        description: "Cross-platform app development",
-                      ),
-                      SkillCard(
-                        icon: Icons.phone_android,
-                        title: "Mobile Development",
-                        description: "Android apps with beautiful UI",
-                      ),
-                      SkillCard(
-                        icon: Icons.web,
-                        title: "Web Development",
-                        description: "Responsive & modern websites",
-                      ),
-                      SkillCard(
-                        icon: Icons.code,
-                        title: "Programming",
-                        description: "Dart • JavaScript • HTML • CSS",
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            // ***********************
-            // PROJECTS SECTION
-            // ***********************
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 60, horizontal: 20),
-              color: Colors.grey[100],
-              child: Column(
-                children: [
-                  Text(
-                    "Projects",
-                    style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent),
-                  ),
-                  SizedBox(height: 40),
-
-                  ProjectCard(
-                    title: "Personal Portfolio App",
-                    description:
-                    "A modern Flutter-based portfolio application showcasing skills and experience.",
-                  ),
-                  SizedBox(height: 20),
-
-                  ProjectCard(
-                    title: "Mobile UI Templates",
-                    description:
-                    "Beautiful Flutter UI screens such as login, signup, dashboards, and more.",
-                  ),
-                  SizedBox(height: 20),
-
-                  ProjectCard(
-                    title: "Web Projects",
-                    description:
-                    "Fully responsive static websites and modern landing pages.",
-                  ),
-                ],
-              ),
-            ),
-
-            // ***********************
-            // CALL TO ACTION
-            // ***********************
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 60, horizontal: 20),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blueAccent, Colors.lightBlueAccent],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    'Want to Work With Me?',
-                    style: TextStyle(
                       fontSize: 26,
+                      color: mocha,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.blueAccent,
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                      textStyle: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    child: Text('Contact Me'),
-                  )
+                  const SizedBox(height: 15),
+                  Text(
+                    "I am Farid Ahmad Haidary from Afghanistan. "
+                        "A passionate Flutter, Mobile & Web Developer. "
+                        "Final year student at Kabul University. "
+                        "I love building modern, responsive and smooth applications.",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 16),
+                  ),
                 ],
               ),
             ),
 
-            // ***********************
             // FOOTER
-            // ***********************
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(20),
-              color: Colors.blueGrey[900],
-              child: Center(
+              padding: const EdgeInsets.all(20),
+              color: mocha,
+              child: const Center(
                 child: Text(
-                  '© 2025 Farid Ahmad Haidary | Afghanistan | All Rights Reserved',
-                  style: TextStyle(color: Colors.white70, fontSize: 16),
+                  "© 2025 Farid Ahmad Haidary | Portfolio",
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -268,22 +180,17 @@ class PortfolioPage extends StatelessWidget {
   }
 }
 
-// --------------------------------------
-// SKILL CARD WIDGET
-// --------------------------------------
 class SkillCard extends StatelessWidget {
   final IconData icon;
   final String title;
-  final String description;
 
-  SkillCard(
-      {required this.icon, required this.title, required this.description});
+  const SkillCard({required this.icon, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 150,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -291,69 +198,22 @@ class SkillCard extends StatelessWidget {
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
             blurRadius: 8,
-            offset: Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Icon(icon, size: 40, color: Colors.blueAccent),
-          SizedBox(height: 15),
-          Text(
-            title,
-            style: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 10),
-          Text(
-            description,
-            style: TextStyle(fontSize: 14, color: Colors.black54),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// --------------------------------------
-// PROJECT CARD WIDGET
-// --------------------------------------
-class ProjectCard extends StatelessWidget {
-  final String title;
-  final String description;
-
-  ProjectCard({required this.title, required this.description});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              blurRadius: 8,
-              offset: Offset(0, 5)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-          SizedBox(height: 10),
-          Text(
-            description,
-            style: TextStyle(fontSize: 16, color: Colors.black54),
+            offset: const Offset(0, 5),
           )
+        ],
+      ),
+      child: Column(
+        children: [
+          Icon(icon, size: 40, color: const Color(0xFFA0785A)),
+          const SizedBox(height: 15),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black),
+          ),
         ],
       ),
     );
